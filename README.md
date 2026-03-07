@@ -5,7 +5,7 @@ A simple tool to check your OpenRouter API credit balance.
 
 - **MenuBar App**: macOS menubar application showing your balance at a glance
 - **Command-line Tool**: Simple Python script for checking balance
-- Auto-refresh every 5 minutes (menubar app)
+- Auto-refresh every 20 seconds (menubar app)
 - Manual refresh option
 - Display credit limit, usage, and remaining balance
 
@@ -47,7 +47,7 @@ python3 menubar_app.py
 
 The app will:
 - Display your balance in the menubar (💰 $X.XX)
-- Auto-refresh every 5 minutes
+- Auto-refresh every 20 seconds
 - Show detailed information in the dropdown menu
 - Allow manual refresh via the menu
 
