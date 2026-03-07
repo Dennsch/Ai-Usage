@@ -48,13 +48,12 @@ class BalanceMenuBar(rumps.App):
     def show_api_key_error(self):
         """Display error when API key is missing."""
         self.title = "💰 Error"
-        alert = rumps.Alert(
-            "API Key Required",
-            "OPENROUTER_API_KEY environment variable not set.\n\n"
+        rumps.alert(
+            title="API Key Required",
+            message="OPENROUTER_API_KEY environment variable not set.\n\n"
             "Set it with:\nexport OPENROUTER_API_KEY='your-key'",
             ok="Quit"
         )
-        alert.run()
         rumps.quit_application()
     
     def build_menu(self):
