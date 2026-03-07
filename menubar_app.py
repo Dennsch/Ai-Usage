@@ -79,24 +79,11 @@ class BalanceMenuBar(rumps.App):
         info = self.current_data['data']
         
         # Display label if available
-        if 'label' in info and info['label']:
-            self.menu.add(rumps.MenuItem(f"Key: {info['label']}", callback=None))
-            self.menu.add(rumps.separator)
-        
-        # Display credit information
-        if 'limit' in info and info['limit'] is not None:
-            limit_val = info['limit']
-            self.menu.add(rumps.MenuItem(f"Credit: ${limit_val:.2f}", callback=None))
-        
-        if 'usage' in info and info['usage'] is not None:
-            usage_val = info['usage']
-            self.menu.add(rumps.MenuItem(f"Used: ${usage_val:.2f}", callback=None))
-            
-            # Calculate remaining if both values exist
-            if 'limit' in info and info['limit'] is not None:
-                remaining = info['limit'] - usage_val
-                self.menu.add(rumps.MenuItem(f"Left: ${remaining:.2f}", callback=None))
-        
+        # Display account credit balance
+        if isinstance(info, (int, float)):
+            self.menu.add(rumps.MenuItem(f"Account Balance: ${info:.2f}", callback=None))
+        else:
+            self.menu.add(rumps.MenuItem(f"Account Balance: {info}", callback=None))
         # Show last update time
         if self.last_update:
             self.menu.add(rumps.separator)
@@ -107,7 +94,7 @@ class BalanceMenuBar(rumps.App):
         """Retrieve balance data from OpenRouter API."""
         api_url = "https://openrouter.ai/api/v1/auth/key"
         
-        req = urllib.request.Request(
+        api_url = "https://openrouter.ai/api/v1/credits"
             api_url,
             headers={
                 "Authorization": f"Bearer {self.api_key}",
@@ -138,7 +125,10 @@ class BalanceMenuBar(rumps.App):
         """Update the menubar title and menu contents."""
         if self.current_data and 'data' in self.current_data:
             info = self.current_data['data']
-            if 'limit' in info and info['limit'] is not None:
+            if isinstance(info, (int, float)):
+                self.title = f"💰 ${info:.2f}"
+            elif isinstance(info, dict) and 'limit' in info:
+                # Fallback for dict response format
                 self.title = f"💰 ${info['limit']:.2f}"
             else:
                 self.title = "💰 N/A"

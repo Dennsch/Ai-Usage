@@ -22,7 +22,7 @@ def get_credit_balance(api_key):
     Returns:
         dict: API response containing credit information
     """
-    url = "https://openrouter.ai/api/v1/auth/key"
+    url = "https://openrouter.ai/api/v1/credits"
     
     headers = {
         "Authorization": f"Bearer {api_key}",
