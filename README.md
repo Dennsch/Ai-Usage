@@ -3,14 +3,17 @@ A simple tool to check your OpenRouter API credit balance.
 
 ## Features
 
-- Connect to OpenRouter API
-- Display current credit balance
-- Simple command-line interface
+- **MenuBar App**: macOS menubar application showing your balance at a glance
+- **Command-line Tool**: Simple Python script for checking balance
+- Auto-refresh every 5 minutes (menubar app)
+- Manual refresh option
+- Display credit limit, usage, and remaining balance
 
 ## Prerequisites
 
 - Python 3.6 or higher
 - OpenRouter API key
+- macOS (for menubar app)
 
 ## Setup
 
@@ -20,8 +23,41 @@ A simple tool to check your OpenRouter API credit balance.
    ```bash
    export OPENROUTER_API_KEY='your-api-key-here'
    ```
+   
+   For permanent setup, add this to your `~/.zshrc` or `~/.bash_profile`:
+   ```bash
+   echo "export OPENROUTER_API_KEY='your-api-key-here'" >> ~/.zshrc
+   source ~/.zshrc
+   ```
+
+3. Install dependencies (for menubar app):
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 ## Usage
+
+### MenuBar App (Recommended)
+
+Run the menubar app to see your balance at a glance:
+
+```bash
+python3 menubar_app.py
+```
+
+The app will:
+- Display your balance in the menubar (💰 $X.XX)
+- Auto-refresh every 5 minutes
+- Show detailed information in the dropdown menu
+- Allow manual refresh via the menu
+
+To keep it running in the background, you can make it executable:
+```bash
+chmod +x menubar_app.py
+./menubar_app.py
+```
+
+### Command-Line Tool
 
 Run the script to check your credit balance:
 
@@ -37,8 +73,8 @@ chmod +x check_balance.py
 
 ## Output
 
-The script will display your OpenRouter account information including:
-- Credit balance
-- Usage limits
-- Rate limits
-- Other account details
+The tools will display your OpenRouter account information including:
+- **Credit Limit**: Total credit available
+- **Usage**: Amount of credit used
+- **Remaining**: Credit balance remaining
+- **Key Label**: Your API key label (if set)
