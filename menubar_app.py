@@ -41,8 +41,8 @@ class BalanceMenuBar(rumps.App):
         # Fetch balance immediately
         self.refresh_balance(None)
         
-        # Start auto-refresh timer (every 5 minutes)
-        self.refresh_timer = rumps.Timer(self.refresh_balance, 300)
+        # Start auto-refresh timer (every 20 seconds)
+        self.refresh_timer = rumps.Timer(self.refresh_balance, 20)
         self.refresh_timer.start()
     
     def show_api_key_error(self):
